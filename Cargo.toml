@@ -1,0 +1,10 @@
+[package]
+name = "gltesting"
+version = "0.1.0"
+authors = ["Kevin <theunnameddude2@gmail.com>"]
+
+[dependencies]
+glutin = "*"
+gl = "*"
+libc = "*"
+cgmath="0.10.0"
