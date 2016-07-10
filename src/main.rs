@@ -123,9 +123,10 @@ static GL_COLOR_DATA: [GLfloat; 108] = [
 fn compile_shader<T: AsRef<Path>>(shader_path: T, typ: GLenum) -> GLuint {
     let mut shader_src = String::new();
     File::open(shader_path).unwrap().read_to_string(&mut shader_src).unwrap();
+    let shader_src = CString::new(shader_src.as_bytes()).unwrap();
     unsafe {
         let shader = gl::CreateShader(typ);
-        gl::ShaderSource(shader, 1, &CString::new(shader_src.as_bytes()).unwrap().as_ptr(), ptr::null());
+        gl::ShaderSource(shader, 1, &shader_src.as_ptr(), ptr::null());
         gl::CompileShader(shader);
 
         let mut status = gl::FALSE as GLint;
